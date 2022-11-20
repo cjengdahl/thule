@@ -18,15 +18,9 @@ class Walker(object):
 
     def __init__(self, visit_hidden_directories=False):
         self.visit_hidden_directories = visit_hidden_directories
-        self.max_depth = None
-        self.dry_run = False
-        # os.walk(top[, topdown=True[, onerror=None[, followlinks=False]]])
 
     def accept(self, directory, action_engine):
-        level = 0
         for dirName, subdirList, fileList in os.walk(directory):
-            print('level {}'.format(level))
-            level += 1
             action_engine.execute_directory_actions(dirName)
             for fname in fileList:
                 action_engine.execute_file_actions(dirName, fname)
